@@ -1,0 +1,33 @@
+.page__header {
+	display: flex;
+	/* justify-content: space-between; */
+	align-items: center;
+	padding: 32px 0px;
+}
+
+.page__header .header__logo {
+	padding-right: 16px;
+	font-size: 24px;
+}
+
+.page__header .header__logo a {
+	color: var(--primary-color-text);
+}
+
+.page__header .header__links {
+	list-style: none;
+	display: flex;
+	margin: 0px;
+	width: 100%;
+	justify-content: flex-end;
+}
+
+.page__header .header__link__item {
+	margin: 0px 8px;
+	padding: 0px 8px;
+	cursor: pointer;
+}
+
+.header__link__item:hover {
+	color: rgb(234, 238, 239);
+}
