@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 // import webpack from 'webpack'
 
 const LAUNCH_COMMAND = process.env.npm_lifecycle_event;
-const is_production = LAUNCH_COMMAND === 'prod' ? true : false;
+const is_production = LAUNCH_COMMAND === 'build' ? true : false;
 
 const baseConfig = {
     entry: ['./src/index.js'],
@@ -97,7 +97,77 @@ const devConfig = {
 };
 
 const prodConfig = {
-
+    module: {
+        rules: [
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'swc-loader',
+                    options: {
+                        jsc: {
+                            parser: {
+                                syntax: "ecmascript",
+                                jsx: true,
+                            },
+                            transform: {
+                                react: {
+                                    pragma: 'React.createElement',
+                                    pragmaFrag: 'React.Fragment',
+                                    throwIfNamespace: true,
+                                    development: true,
+                                    useBuiltins: false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                test: /\.(ts|tsx)$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: "swc-loader",
+                    options: {
+                        jsc: {
+                            parser: {
+                                syntax: "typescript"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
+        ]
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: "index.html",
+            template: __dirname + '/public/index.html',
+            inject: 'body',
+            hash: true
+        })
+    ],
+    optimization: {
+        runtimeChunk: 'single',
+        splitChunks: {
+            chunks: 'all',
+            maxInitialRequests: Infinity,
+            minSize: 0,
+            cacheGroups: {
+                vendor: {
+                    test: /[\\/]node_modules[\\/](!lodash)/,
+                    name(module) {
+                        const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+                        return `npm.${packageName.replace('@', '')}`;
+                    },
+                },
+            },
+        },
+    }
 };
 
 module.exports = is_production ?
