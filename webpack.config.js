@@ -148,7 +148,8 @@ const prodConfig = {
             filename: "index.html",
             template: __dirname + '/public/index.html',
             inject: 'body',
-            hash: true
+            hash: true,
+            publicPath: '/'
         })
     ],
     optimization: {
