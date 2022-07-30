@@ -1,0 +1,28 @@
+.hamburger-icon {
+	display: inline-block;
+	cursor: pointer;
+}
+
+.bar1,
+.bar2,
+.bar3 {
+	height: 4px;
+	width: 32px;
+	margin: 6px 0;
+	transition: 0.4s;
+	background-color: #99a2bd;
+}
+
+.change .bar1 {
+	-webkit-transform: rotate(-44deg) translate(-7px, 6px);
+	transform: rotate(-44deg) translate(-7px, 6px);
+}
+
+.change .bar2 {
+	opacity: 0;
+}
+
+.change .bar3 {
+	-webkit-transform: rotate(44deg) translate(-8px, -8px);
+	transform: rotate(44deg) translate(-8px, -8px);
+}
