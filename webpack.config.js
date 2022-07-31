@@ -149,7 +149,8 @@ const prodConfig = {
             template: __dirname + '/public/index.html',
             inject: 'body',
             hash: true,
-            publicPath: '/'
+            publicPath: '/',
+            favicon: './src/assets/favicon.ico'
         })
     ],
     optimization: {
