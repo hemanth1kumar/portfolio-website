@@ -150,7 +150,7 @@ const prodConfig = {
             inject: 'body',
             hash: true,
             publicPath: '/',
-            favicon: './src/assets/favicon.ico'
+            favicon: './src/assets/img/favicon.ico'
         })
     ],
     optimization: {
